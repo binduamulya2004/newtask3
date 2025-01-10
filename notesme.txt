@@ -1,0 +1,30 @@
+npm init -y
+npm install express bcrypt jsonwebtoken joi knex mysql2 dotenv crypto morgan body-parser cors
+npm install --save-dev nodemon
+npx knex migrate:make create_users_table --knexfile=src/mysql/knexfile.js
+npm install knex -g
+knex init
+ npx knex migrate:make create_users_table --knexfile=mysql/knexfile.js
+npx knex migrate:latest --knexfile=src/mysql/knexfile.js
+
+
+
+
+
+
+
+ng generate interceptor auth
+ng generate service services/auth
+
+
+
+
+
+
+npm install ngx-toastr --save
+ npm install ngx-toastr@15.0.0 --save
+  "styles": [
+              "src/styles.scss",
+             "node_modules/bootstrap/dist/css/bootstrap.min.css",
+            "node_modules/ngx-toastr/toastr.css"
+            ],
