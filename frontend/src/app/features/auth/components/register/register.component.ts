@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
- import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -17,7 +17,7 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private toastr: ToastrService
+    //private toastr: ToastrService
  )
  {
     this.signupForm = this.fb.group({
@@ -39,22 +39,24 @@ export class RegisterComponent {
     if (this.signupForm.valid) {
       // Extract form values
       const userData = this.signupForm.value;
+      console.log("userdata",userData);
+
 
       // Call the register method of AuthService
       this.authService.register(userData).subscribe(
         (response) => {
           // Redirect to login after successful registration
-          this.toastr.success('Register successful!', 'Success');
+          alert('Register successful!');
           this.router.navigate(['/login']);
          
         },
        (error) => {
     // Check if the error indicates that the user already exists
-    if (error.status === 409) { // Assuming 409 Conflict status code for existing user
-      this.toastr.error('User already exists. Please use a different email.', 'Error');
+    if (error.status === 500) { // Assuming 409 Conflict status code for existing user
+      alert('User already exists. Please use a different email.');
     } else {
       // Handle other errors
-      this.toastr.error('Registration failed. Please check your credentials and try again.', 'Error');
+      alert('Registration failed. Please check your credentials and try again.');
     }
     console.error('Registration failed', error);
   }

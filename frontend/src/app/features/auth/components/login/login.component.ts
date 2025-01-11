@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
  
- import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +16,6 @@ export class LoginComponent {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private toastr: ToastrService
   ) {
 this.loginForm = this.fb.group({
 email: ['', [Validators.required, Validators.email]],
@@ -38,14 +36,15 @@ email: ['', [Validators.required, Validators.email]],
           if (token) {
             // Store the token in localStorage
             localStorage.setItem('token', token);
-
-            this.toastr.success('Login successful!', 'Success');
+            alert('Login successful!');
+           // this.toastr.success('Login successful!', 'Success');
             // Redirect to dashboard after successful login
             this.router.navigate(['/dashboard']);
           }
         },
         (error: any) => {
-          this.toastr.error('Login failed. Please check your credentials and try again.', 'Error');
+          alert('Login failed. Please check your credentials and try again.');
+        //  this.toastr.error('Login failed. Please check your credentials and try again.', 'Error');
           console.error('Login failed', error);
         }
       );

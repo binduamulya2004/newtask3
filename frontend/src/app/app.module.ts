@@ -11,7 +11,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { DashboardComponent } from './features/auth/components/dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ToastrModule } from 'ngx-toastr';
+// import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,14 +25,15 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     HttpClientModule,
      BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot({
-      timeOut: 3000, // duration in milliseconds
-      positionClass: 'toast-top-right', // position of the toast
-      preventDuplicates: true, // prevent duplicate toasts
-      progressBar: true, // show progress bar
-      closeButton: true, // show close button
-      tapToDismiss: true,
-    }), 
+  //   ToastrModule.forRoot({
+  //     timeOut: 5000, // duration in milliseconds
+  //     positionClass: 'toast-top-center', // position of the toast
+  //     preventDuplicates: true, // prevent duplicate toasts
+  //     progressBar: true, // show progress bar
+  //     closeButton: true, // show close button
+  //     tapToDismiss: true,
+  //     newestOnTop: true,
+  //   }), 
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]

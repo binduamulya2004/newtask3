@@ -11,7 +11,7 @@ dotenv.config();
 module.exports = {
   async signup(req, res, next) {
     try {
-      console.log(req.body,'req.body');
+      console.log('req-->body',req.body);
       const { error } = signupValidation.validate(req.body);
       if (error) return res.status(400).json({ message: error.details[0].message });
 
@@ -41,7 +41,7 @@ module.exports = {
       if (!user) return res.status(404).json({ message: 'User not found' });
 
       const isValidPassword = await bcrypt.compare(password, user.password);
-      console.log(isValidPassword,'isValidPassword');
+      console.log('isValidPassword:',isValidPassword,);
       if (!isValidPassword) return res.status(401).json({ message: 'Invalid credentials' });
 
       const token = jwt.sign({ id: user.user_id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
