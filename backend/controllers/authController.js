@@ -17,7 +17,7 @@ module.exports = {
 
       const { first_name, last_name, email, password } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
-      const username = `${first_name.toLowerCase()}.${last_name.toLowerCase()}_${shortid.generate(5)}`;
+      const username = `${first_name} ${last_name}`;
       
       await userModel.createUser({
         first_name,
@@ -46,6 +46,23 @@ module.exports = {
 
       const token = jwt.sign({ id: user.user_id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
       res.status(200).json({ token, user });
+    } catch (err) {
+      next(err);
+    }
+  },
+  async getUserDetails(req, res, next) {
+    try {
+      const user = await userModel.findEmail(req.user.email); // Fetch user by email from token
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      // Return only the required fields
+      res.status(200).json({
+        username: user.username,
+        email: user.email,
+        profile_pic: user.profile_pic || null,
+      });
     } catch (err) {
       next(err);
     }

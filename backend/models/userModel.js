@@ -7,6 +7,13 @@ module.exports = {
   async findByEmail(email) {
     return db('users').where({ email }).first();
   },
+  async findEmail(email) {
+  return db('users')
+    .select('user_id', 'username', 'email', 'profile_pic') // Include profile photo
+    .where({ email })
+    .first();
+},
+
   async findByUsername(username) {
     return db('users').where({ username }).first();
   },

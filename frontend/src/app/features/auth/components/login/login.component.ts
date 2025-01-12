@@ -27,6 +27,7 @@ email: ['', [Validators.required, Validators.email]],
     if (this.loginForm.valid) {
       // Extract form values
       const credentials = this.loginForm.value;
+      console.log("login detailss :",credentials);
 
       // Call the login method of AuthService
       this.authService.login(credentials).subscribe(
@@ -36,6 +37,7 @@ email: ['', [Validators.required, Validators.email]],
           if (token) {
             // Store the token in localStorage
             localStorage.setItem('token', token);
+
             alert('Login successful!');
            // this.toastr.success('Login successful!', 'Success');
             // Redirect to dashboard after successful login
